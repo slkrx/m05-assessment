@@ -26,15 +26,14 @@ public class ForagerService {
     }
 
     public Result<Forager> addForager(Forager forager) {
-//        Result<Forage> result = validate(forager);
-//        if (!result.isSuccess()) {
-//            return result;
-//        }
-//
-//        result.setPayload(forageRepository.add(forage));
-//
-//        return result;
-        return null;
+        Result<Forager> result = validate(forager);
+        if (!result.isSuccess()) {
+            return result;
+        }
+
+        result.setPayload(repository.addForager(forager));
+
+        return result;
     }
 
     public Result<Forager> validate(Forager forager) {
