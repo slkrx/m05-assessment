@@ -55,19 +55,19 @@ public class ForagerService {
         return result;
     }
 
-    public void validateStateAbb(Forager forager, Result<Forager> result) {
+    private void validateStateAbb(Forager forager, Result<Forager> result) {
         if(!List.of(stateAbbreviations).contains(forager.getState()))
             result.addErrorMessage("State abbreviation must be a valid state.");
     }
 
-    public void validateNotDuplicate(Forager forager, Result<Forager> result) {
+    private void validateNotDuplicate(Forager forager, Result<Forager> result) {
        Forager foragerFound = repository.findByKey(forager.getFirstName(), forager.getLastName(), forager.getState());
        if (foragerFound != null) {
            result.addErrorMessage("Forager first name, last name, and state combination must be unique.");
        }
     }
 
-    public Result<Forager> validateNulls(Forager forager) {
+    private Result<Forager> validateNulls(Forager forager) {
         Result<Forager> result = new Result<>();
 
         if (forager == null) {

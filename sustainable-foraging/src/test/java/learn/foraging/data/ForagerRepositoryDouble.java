@@ -38,12 +38,18 @@ public class ForagerRepositoryDouble implements ForagerRepository {
 
     @Override
     public Forager addForager(Forager forager) {
-        return null;
+
+        return FORAGER;
     }
 
     @Override
     public Forager findByKey(String firstName, String lastName, String stateAbb) {
-        return null;
+        return foragers.stream()
+                .filter(i -> i.getFirstName().equalsIgnoreCase(firstName) &&
+                        i.getLastName().equalsIgnoreCase(lastName) &&
+                        i.getState().equalsIgnoreCase(stateAbb))
+                .findFirst()
+                .orElse(null);
     }
 
     private static Forager makeForager() {
