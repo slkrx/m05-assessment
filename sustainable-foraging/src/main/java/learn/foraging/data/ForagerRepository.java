@@ -10,4 +10,8 @@ public interface ForagerRepository {
     List<Forager> findByLastName(String lastNamePrefix);
 
     List<Forager> findByState(String stateAbbr);
+
+    Forager addForager(Forager forager);
+
+    Forager findByKey(String firstName, String lastName, String stateAbb);
 }

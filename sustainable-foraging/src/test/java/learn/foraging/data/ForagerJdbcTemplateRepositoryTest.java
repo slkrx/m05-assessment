@@ -10,8 +10,11 @@ import java.util.List;
 
 import static learn.foraging.TestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ForagerJdbcTemplateRepositoryTest {
+    static final int NEXT_ID = 3;
+
     JdbcTemplate jdbcTemplate = DataHelper.getJdbcTemplate();
     ForagerJdbcTemplateRepository repository = new ForagerJdbcTemplateRepository(jdbcTemplate);
 
@@ -49,5 +52,27 @@ class ForagerJdbcTemplateRepositoryTest {
         List<Forager> expected = List.of();
         List<Forager> actual = repository.findByState("fjkdslf");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldAddForager() {
+        Forager arg = new Forager(0, "new", "new", "TX");
+        Forager expected = new Forager(NEXT_ID, "new", "new", "TX");
+        Forager actual = repository.addForager(arg);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindForagerByKey() {
+       Forager expected = FORAGER_ONE;
+       Forager actual = repository.findByKey("First 1", "Last 1", "OR");
+       assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldNotFindForagerByMissingKey() {
+        Forager expected = FORAGER_ONE;
+        Forager actual = repository.findByKey("First 1", "Last 1", "TX");
+        assertNotEquals(expected, actual);
     }
 }
