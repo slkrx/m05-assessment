@@ -20,4 +20,5 @@ public class ForagerService {
     public List<Forager> findByLastName(String prefix) {
         return repository.findByLastName(prefix);
     }
+
 }

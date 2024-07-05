@@ -60,6 +60,9 @@ public class Controller {
                 case ADD_ITEM:
                     addItem();
                     break;
+                case VIEW_FORAGERS_BY_STATE:
+                    getForagerByState();
+                    break;
             }
         } while (option != MainMenuOption.EXIT);
     }
@@ -117,6 +120,12 @@ public class Controller {
         String lastNamePrefix = view.getForagerNamePrefix();
         List<Forager> foragers = foragerService.findByLastName(lastNamePrefix);
         return view.chooseForager(foragers);
+    }
+
+    private void getForagerByState() {
+        String stateAbb = view.getForagerStateAbb();
+        List<Forager> foragers = foragerService.findByState(stateAbb);
+        view.displayForagers(foragers);
     }
 
     private Item getItem() {

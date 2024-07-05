@@ -40,6 +40,11 @@ public class View {
         return io.readRequiredString("Forager last name starts with: ");
     }
 
+    public String getForagerStateAbb() {
+        return io.readRequiredString("Forager state is: ");
+    }
+
+
     public Forager chooseForager(List<Forager> foragers) {
         if (foragers.size() == 0) {
             io.println("No foragers found");
@@ -63,6 +68,24 @@ public class View {
             return null;
         }
         return foragers.get(index - 1);
+    }
+
+    public void displayForagers(List<Forager> foragers) {
+        if (foragers.size() == 0) {
+            io.println("No foragers found");
+            return;
+        }
+
+        int index = 1;
+        for (Forager forager : foragers.stream().limit(25).collect(Collectors.toList())) {
+            io.printf("%s: %s %s%n", index++, forager.getFirstName(), forager.getLastName());
+        }
+        index--;
+
+        if (foragers.size() > 25) {
+            io.println("More than 25 foragers found. Showing first 25. Please refine your search.");
+        }
+
     }
 
     public Category getItemCategory() {

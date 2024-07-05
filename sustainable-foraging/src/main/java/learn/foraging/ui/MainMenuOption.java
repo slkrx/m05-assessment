@@ -8,7 +8,9 @@ public enum MainMenuOption {
     VIEW_ITEMS("View Items"),
     ADD_FORAGE("Add a Forage"),
     ADD_FORAGER("Add a Forager"),
-    ADD_ITEM("Add an Item");
+    ADD_ITEM("Add an Item"),
+
+    VIEW_FORAGERS_BY_STATE("View Foragers By State");
 
     private String message;
 
