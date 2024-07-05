@@ -30,6 +30,12 @@ public class ForagerJdbcTemplateRepository implements ForagerRepository {
 
     @Override
     public List<Forager> findByState(String stateAbbr) {
-        return null;
+        final String sql = """
+                select forager_id, first_name, last_name, state_abbr
+                from forager
+                where state_abbr = ?;
+                """;
+
+        return jdbcTemplate.query(sql, new ForagerMapper(), stateAbbr);
     }
 }
